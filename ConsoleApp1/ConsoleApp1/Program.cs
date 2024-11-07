@@ -1,4 +1,6 @@
-﻿namespace ConsoleApp1
+﻿using System.IO;
+
+namespace ConsoleApp1
 {
     internal class Program
     {
@@ -55,25 +57,25 @@
                 score++;
 
             } while (c.Key != ConsoleKey.Enter);
+             score--;
             //code for Exiting
-
+            
             Console.WriteLine($"Wow Quite the Haul! You got a score of {score}! \nLets save this shall we?");
 
+            string path = @"C:[username].txt"; 
+            TextWriter tsw = new StreamWriter(@"C:[username].txt" , true);
 
-            string path = @"[username].txt";
-           
-                // Create a file to write to.
-                using (StreamWriter sw = File.CreateText(path))
-                {
-                    sw.WriteLine($"User: {name}");
-                   
-                    sw.WriteLine($"Score: {score}");
-                }
-            
+            //Writing text to the file.
+            tsw.WriteLine($"User: {name}");
+            tsw.WriteLine($"Score: {score}");
 
-            // Open the file to read from.
+            //Close the file.
+            tsw.Close();
+
+            //read the file
             string readText = File.ReadAllText(path);
             Console.WriteLine(readText);
+
 
 
         }
